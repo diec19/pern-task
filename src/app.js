@@ -3,6 +3,7 @@ import morgan from "morgan";
 import taskRoutes from './routes/tasks.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
+
 //middlewares
 const app= express();
 app.use(morgan('dev'))
