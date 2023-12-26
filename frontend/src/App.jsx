@@ -6,10 +6,13 @@ import RegisterPage from "./pages/RegisterPage"
 import TasksPage from "./pages/TasksPage"
 import TaskFormPage from "./pages/TaskFormPage"
 import ProfilePage from "./pages/ProfilePage"
+import NotFound from './pages/NotFound'
+
 
 const App = () => {
   return (
-     <Routes>
+    
+       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/about' element={<AboutPage />}/>
         <Route path='/login' element={<LoginPage />}/>
@@ -19,8 +22,10 @@ const App = () => {
         <Route path='/tasks/new' element={<TaskFormPage />}/>
         <Route path='/tasks/1/edit' element={<TaskFormPage />}/>
         <Route path='/profile' element={<ProfilePage />}/>
+        <Route path='*' element={<NotFound/>}/>
 
      </Routes>
+    
   )
 }
 

@@ -3,6 +3,15 @@ import { pool } from "../db.js";
 import { createAccessToken } from "../libs/jwt.js";
 import md5 from "md5";
 
+
+export const getAllUsers = async (req, res) => {
+  console.log(req.userId)
+  const result = await pool.query("SELECT * FROM users");
+  console.log(result);
+  return res.json(result.rows);
+};
+
+
 export const signin = async(req, res) => {
    const {email, password} = req.body
 
