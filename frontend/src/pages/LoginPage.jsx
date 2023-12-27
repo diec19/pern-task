@@ -11,17 +11,30 @@ const LoginPage = () => {
   } = useForm();
   const navigate = useNavigate()
 
-  const {signin} =useAuth()
+  const {signin,errors:alertas, } =useAuth()
 
   const onSubmit = handleSubmit(async (data) => {
-    signin(data)
+    const user = await signin(data);
+
+    if(user){
     navigate("/profile")
+  }
   });
 
   return (
     <div className="h-[calc(100vh-64px)] flex items-center justify-center">
       <Card>
-        <h3 className="text-4x1 font-bold my-2 text-center">Login</h3>
+
+        {
+          alertas && (
+            alertas.map(err=>(
+              <p className="bg-red-500 opacity-65 text-black m-4 p-2 py-2 rounded-md text-center">
+                {err}
+              </p>
+            ))
+          )
+        }
+        <h3 className="text-4x1 font-bold my-5 text-center">Login</h3>
 
         <form onSubmit={onSubmit}>
           <Label htmlForm="email">Email</Label>

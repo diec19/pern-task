@@ -11,18 +11,32 @@ const RegisterPage = () => {
     formState: { errors },
   } = useForm();
 
- const {signup} = useAuth()
+ const {signup,errors:alertas} = useAuth()
  const navigate = useNavigate()
 
   const onSubmit = handleSubmit(async(data) => {  
-    await signup(data)
-    navigate('/profile')
+    const user = await signup(data);
+
+    if(user){
+    navigate("/profile")
+  }
     
   });
 
   return (
     <div className="h-[calc(100vh-64px)] flex items-center justify-center">
       <Card>
+
+      {
+          alertas && (
+            alertas.map(err=>(
+              <p className="bg-red-500 opacity-65 text-black m-4 p-2 py-2 rounded-md text-center">
+                {err}
+              </p>
+            ))
+          )
+        }
+
       <h3 className="text-4x1 font-bold my-5 text-center">Register</h3>
 
         <form onSubmit={onSubmit}>

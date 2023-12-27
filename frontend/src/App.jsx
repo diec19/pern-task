@@ -1,3 +1,4 @@
+import Navbar from './components/navbar/Navbar'
 import {Routes, Route} from 'react-router-dom'
 import HomePage from "./pages/HomePage"
 import AboutPage from "./pages/AboutPage"
@@ -12,7 +13,10 @@ import NotFound from './pages/NotFound'
 const App = () => {
   return (
     
-       <Routes>
+       <>
+       <Navbar/>
+       
+        <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/about' element={<AboutPage />}/>
         <Route path='/login' element={<LoginPage />}/>
@@ -24,7 +28,9 @@ const App = () => {
         <Route path='/profile' element={<ProfilePage />}/>
         <Route path='*' element={<NotFound/>}/>
 
-     </Routes>
+        </Routes>
+       
+       </>
     
   )
 }
