@@ -1,28 +1,58 @@
-import {Link, useLocation} from 'react-router-dom'
-import { navigation } from './navigation'
+import { Link, useLocation } from "react-router-dom";
+import { publicRoutes, privateRoutes } from "./navigation";
+import { Container } from "../ui";
+import { useAuth } from "../../context/AuthContext";
 
+function Navbar() {
+  const location = useLocation();
+  const { isAuth, signout } = useAuth();
 
-function Navbar(){
+  return (
+    <nav className="bg-zinc-950">
+      <Container>
+        <div className="flex justify-between py-3">
+          <Link to="/">
+            <h1 className="font-bold text-2xl">PERN Tasks</h1>
+          </Link>
 
-    const location = useLocation();
-    return(
-        <nav className='bg-zinc-950 flex justify-between px-20 py-7'>
-            <h1>
-                PERN Tasks
-            </h1>
-
-            <ul className='flex gap-x-2'>
-                
-                {navigation.map(({path, name})=>(
-                   <li className={`text-slate-300 ${location.pathname==path && 'bg-sky-500 px-3 py-1'}`} key={path}>
-                      <Link to={path}>{name}</Link>
-                   </li>
+          <ul className="flex gap-x-2">
+            {isAuth ? (
+              <>
+                {privateRoutes.map(({ path, name }) => (
+                  <li
+                    className={`text-slate-300 ${
+                      location.pathname == path && "bg-sky-500 px-3 py-1"
+                    }`}
+                    key={path}
+                  >
+                    <Link to={path}>{name}</Link>
+                  </li>
                 ))}
-                  
-            </ul>
-
-        </nav>
-    )
+                <li
+                  onClick={() => {
+                    signout();
+                  }}
+                >
+                  Logout
+                </li>
+              </>
+            ) : (
+              publicRoutes.map(({ path, name }) => (
+                <li
+                  className={`text-slate-300 ${
+                    location.pathname == path && "bg-sky-500 px-3 py-1"
+                  }`}
+                  key={path}
+                >
+                  <Link to={path}>{name}</Link>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      </Container>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
