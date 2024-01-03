@@ -1,3 +1,5 @@
+import { RiAddCircleFill } from "react-icons/ri";
+
 export const privateRoutes =[
     
   
@@ -7,13 +9,11 @@ export const privateRoutes =[
         path: '/tasks'
     },
     {
-        name: 'New Tasks',
-        path: '/tasks/new'
+        name: 'Add',
+        path: '/tasks/new',
+        icon: <RiAddCircleFill className="w-5 h-5"/>,
     },
-    {
-        name: 'Edit Tasks',
-        path: '/tasks/1/edit'
-    },
+    
     {
         name: 'Profile',
         path: '/profile'

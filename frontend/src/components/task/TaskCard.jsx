@@ -1,14 +1,18 @@
 import {Card,Button} from "../ui";
 import { useTasks } from "../../context/TaskContext";
+import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { GoTrash } from "react-icons/go";
+import { PiPencilLight } from "react-icons/pi";
 
 export const TaskCard = ({task}) => {
 
   const {deleteTask} = useTasks()
+  const {user}=useAuth()
   const navigate = useNavigate()
   
   return (
-    <Card key={task.id} className="px-7 py-4">
+    <Card key={task.id} className="px-7 py-4 flex flex-col justify-center">
       <div>  
       <h1 className="text-2xl font-bold">{task.title}</h1>
       <p>{task.description}</p>
@@ -19,7 +23,9 @@ export const TaskCard = ({task}) => {
           onClick={()=>{
              navigate(`/tasks/${task.id}/edit`)
           }}
-        >Editar</Button>
+        >
+          <PiPencilLight />
+          Editar</Button>
         <Button
           className="bg-red-500 hover:bg-red-600"
           onClick={async()=>{
@@ -27,7 +33,12 @@ export const TaskCard = ({task}) => {
                 deleteTask(task.id)
             }
           }}
-        >Eliminar</Button>
+          
+        >
+        <GoTrash className="text-white"/>
+        Eliminar</Button>
+
+       
       </div>
     </Card>
   );

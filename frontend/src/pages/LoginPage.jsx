@@ -17,7 +17,7 @@ const LoginPage = () => {
     const user = await signin(data);
 
     if(user){
-    navigate("/profile")
+    navigate("/tasks")
   }
   });
 
@@ -62,7 +62,7 @@ const LoginPage = () => {
           <Button>Register</Button>
 
           <div className="flex justify-between my-4">
-            <p>No tienes cuenta aun?</p>
+            <p className="mr-4">No tienes cuenta aun?</p>
             <Link to="/register" className="font-bold">
               Login
             </Link>

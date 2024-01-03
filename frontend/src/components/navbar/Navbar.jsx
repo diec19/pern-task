@@ -2,10 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import { publicRoutes, privateRoutes } from "./navigation";
 import { Container } from "../ui";
 import { useAuth } from "../../context/AuthContext";
+import {twMerge} from 'tailwind-merge'
 
 function Navbar() {
   const location = useLocation();
-  const { isAuth, signout } = useAuth();
+  const { isAuth, signout, user } = useAuth();
 
   return (
     <nav className="bg-zinc-950">
@@ -15,33 +16,41 @@ function Navbar() {
             <h1 className="font-bold text-2xl">PERN Tasks</h1>
           </Link>
 
-          <ul className="flex gap-x-2">
+          <ul className="flex items-center justify-center md:gap-x-2">
             {isAuth ? (
               <>
-                {privateRoutes.map(({ path, name }) => (
-                  <li
-                    className={`text-slate-300 ${
-                      location.pathname == path && "bg-sky-500 px-3 py-1"
-                    }`}
-                    key={path}
-                  >
-                    <Link to={path}>{name}</Link>
+                {privateRoutes.map(({ path, name, icon }) => (
+                  <li key={path}>
+                  <Link to={path}
+                    className={twMerge('text-slate-300 flex items-center px-3 py-1 gap-x-1',
+                    location.pathname==path && "bg-sky-500"
+                  )}
+                    >
+                    {icon}
+                    <span className="hidden sm:block">
+                      {name}
+                    </span>
+                    </Link>
                   </li>
                 ))}
-                <li
+                <li className="'text-slate-300 flex items-center px-3 py-1"
                   onClick={() => {
                     signout();
                   }}
                 >
                   Logout
                 </li>
+               <li className="flex gap-x-1 items-center justify-center">
+                 <img src={user.gravatar} alt="" className="h-8 w-8 rounded-full"/>
+                 <span className="font-medium">{user.name}</span>
+               </li>
               </>
             ) : (
               publicRoutes.map(({ path, name }) => (
                 <li
-                  className={`text-slate-300 ${
-                    location.pathname == path && "bg-sky-500 px-3 py-1"
-                  }`}
+                className={twMerge('text-slate-300 flex items-center px-3 py-1 hover:cursor-pointer',
+                location.pathname==path && "bg-sky-500"
+              )}
                   key={path}
                 >
                   <Link to={path}>{name}</Link>

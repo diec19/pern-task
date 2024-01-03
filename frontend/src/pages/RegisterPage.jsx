@@ -18,10 +18,12 @@ const RegisterPage = () => {
     const user = await signup(data);
 
     if(user){
-    navigate("/profile")
+    navigate("/tasks")
   }
     
   });
+
+  
 
   return (
     <div className="h-[calc(100vh-10rem)] flex items-center justify-center">
@@ -81,7 +83,7 @@ const RegisterPage = () => {
           <Button>Register</Button>
 
           <div className="flex justify-between my-4">
-            <p>Ya tengo una cuenta</p>
+            <p className="mr-4">Ya tengo una cuenta</p>
             <Link to="/login" className="font-bold">
               Register
             </Link>
