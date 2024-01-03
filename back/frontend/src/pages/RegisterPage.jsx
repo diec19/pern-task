@@ -28,11 +28,15 @@ const RegisterPage = () => {
   return (
     <div className="h-[calc(100vh-10rem)] flex items-center justify-center">
       <Card>
+      <li className="flex gap-x-1 items-center justify-center">
+                 <img src="src/assets/logo.png" alt=""/>
+                
+       </li>
 
       {
           alertas && (
             alertas.map(err=>(
-              <p className="bg-red-500 opacity-65 text-black m-4 p-2 py-2 rounded-md text-center">
+              <p className="bg-red-500 opacity-65 text-white m-4 p-2 py-2 rounded-md text-center">
                 {err}
               </p>
             ))
@@ -43,10 +47,10 @@ const RegisterPage = () => {
 
         <form onSubmit={onSubmit}>
         <Label htmlForm="name">
-             Nombre y Apellido
+             Nombre
            </Label>
           <Input
-            placeholder="Ingrese su nombre completo"
+            placeholder="nombre completo"
             {...register("name", {
               required: true,
             })}
@@ -59,7 +63,7 @@ const RegisterPage = () => {
            </Label>
           <Input
             type="email"
-            placeholder="Ingrese su Email"
+            placeholder="ejemplo@test.com"
             {...register("email", {
               required: true,
             })}
@@ -71,7 +75,7 @@ const RegisterPage = () => {
            </Label>
           <Input
             type="password"
-            placeholder="Ingrese su password"
+            placeholder="password"
             {...register("password", {
               required: true,
             })}

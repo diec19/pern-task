@@ -3,6 +3,7 @@ import { publicRoutes, privateRoutes } from "./navigation";
 import { Container } from "../ui";
 import { useAuth } from "../../context/AuthContext";
 import {twMerge} from 'tailwind-merge'
+import { FaSignOutAlt } from "react-icons/fa";
 
 function Navbar() {
   const location = useLocation();
@@ -38,6 +39,7 @@ function Navbar() {
                     signout();
                   }}
                 >
+                  <FaSignOutAlt className="w-5 h-5"/>
                   Logout
                 </li>
                <li className="flex gap-x-1 items-center justify-center">
@@ -46,14 +48,18 @@ function Navbar() {
                </li>
               </>
             ) : (
-              publicRoutes.map(({ path, name }) => (
-                <li
-                className={twMerge('text-slate-300 flex items-center px-3 py-1 hover:cursor-pointer',
-                location.pathname==path && "bg-sky-500"
-              )}
-                  key={path}
-                >
-                  <Link to={path}>{name}</Link>
+              publicRoutes.map(({ path, name, icon }) => (
+                <li key={path}>
+                <Link to={path}
+                  className={twMerge('text-slate-300 flex items-center px-3 py-1 gap-x-1',
+                  location.pathname==path && "bg-sky-500"
+                )}
+                  >
+                  {icon}
+                  <span className="hidden sm:block">
+                    {name}
+                  </span>
+                  </Link>
                 </li>
               ))
             )}
